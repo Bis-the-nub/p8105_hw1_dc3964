@@ -9,15 +9,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Problem 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an R Markdown document. Markdown is a simple formatting syntax for 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(moderndive)
+data("early_january_weather")
+summary(early_january_weather)
+nrow(early_january_weather)
+ncol(early_january_weather)
+mean(early_january_weather$temp)
 ```
+The `early_january_weather` dataset contains variables include `year`, `month`, `day`, `hour`, `origin` (Newark airport), `temp` (temperature in Fahrenheit), `dewp` (dew point), `humid` (relative humidity), `wind_dir`, `wind_speed`, `wind_gust`, `precip` (precipitation in inches), `pressure` (sea level pressure in millibars), `visib` (visibility in miles), and `time_hour` (yyyy/mm/dd/hr/min/second). 
+
+This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns. The mean temperature during this period is `r mean(early_january_weather$temp, na.rm = TRUE)` degrees Fahrenheit.
 
 ## Including Plots
 

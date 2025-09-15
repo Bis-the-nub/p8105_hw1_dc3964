@@ -25,12 +25,33 @@ The `early_january_weather` dataset contains variables include `year`, `month`, 
 
 This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns. The mean temperature during this period is `r mean(early_january_weather$temp, na.rm = TRUE)` degrees Fahrenheit.
 
-## Including Plots
+## Problem 2
+```{r, message = FALSE}
+library(tidyverse)
+set.seed(123)  # reproducibility
 
-You can also embed plots, for example:
+# build tibble
+tb <- tibble(
+  sample = rnorm(10),
+  positive = sample > 0,
+  chr_10 = c("This","class","is","important",
+            "for","my","future","studying","in","biostatistics"),
+  factor_level = factor(rep(c("A", "B", "C"), length.out = 10))
+)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# attempting to calculate average
+tb %>% pull(sample) %>% mean()
+tb %>% pull(positive) %>% mean()
+tb %>% pull(chr_10) %>% mean()
+tb %>% pull(factor_level) %>% mean()
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Only the first two variables 'sample' and 'positive' works, the latter two variables returned NA value.
+```{r, results = 'hide', warning = FALSE}
+# apply as.numeric() to logical, character, and factor variables
+as.numeric(tb$sample)
+as.numeric(tb$positive)
+as.numeric(tb$chr_10)
+as.numeric(tb$factor_level)
+```
+When as.numeric() is applied, logical values are converted to 1 and 0, so taking the mean works and gives the proportion of TRUE values, this can also be applied when using mean(). Character vectors cannot be converted to numbers, so as.numeric() returns NA and produces a warning, which is why mean() fails.   
+Factor vectors are converted to their internal integer when using as.numeric(), allowing R to calculate its mean (although it is meaningless). However, when computing directly with mean(), it will return as NA since mean() will not convert the factor vectors.

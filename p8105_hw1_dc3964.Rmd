@@ -11,23 +11,38 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Problem 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for 
-
-```{r}
+Loading needed packages
+```{r, message = FALSE}
 library(moderndive)
+library(ggplot2)
+library(tidyverse)
+```
+
+Importing data while inspecting it
+```{r, results = FALSE}
 data("early_january_weather")
 summary(early_january_weather)
-nrow(early_january_weather)
-ncol(early_january_weather)
-mean(early_january_weather$temp)
 ```
 The `early_january_weather` dataset contains variables include `year`, `month`, `day`, `hour`, `origin` (Newark airport), `temp` (temperature in Fahrenheit), `dewp` (dew point), `humid` (relative humidity), `wind_dir`, `wind_speed`, `wind_gust`, `precip` (precipitation in inches), `pressure` (sea level pressure in millibars), `visib` (visibility in miles), and `time_hour` (yyyy/mm/dd/hr/min/second). 
 
 This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns. The mean temperature during this period is `r mean(early_january_weather$temp, na.rm = TRUE)` degrees Fahrenheit.
 
+Plotting a scatterplot between temp(y) and time_hour(x)
+```{r, results='hide'}
+#plotting scatter plot 
+Sys.setlocale("LC_TIME", "C") # transfer date from mandarin to english
+ggplot(early_january_weather, 
+       aes(x = time_hour, 
+           y = temp, 
+           color = humid)) +
+       geom_point(alpha = 0.5) 
+# Save plot
+ggsave("early_january_weather.png", width = 8, height = 5, dpi = 300)
+```
+In the scatterplot, it is apparent that before January 11st, in most days the relative humidity were below 60. Roughly between January 11st and 15th, both relative humidity and temperature were steadily rising, while temperature plunged after Jan 15th.
+
 ## Problem 2
 ```{r, message = FALSE}
-library(tidyverse)
 set.seed(123)  # reproducibility
 
 # build tibble

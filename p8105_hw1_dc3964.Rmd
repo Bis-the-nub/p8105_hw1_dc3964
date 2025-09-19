@@ -2,7 +2,7 @@
 title: "hw1"
 author: "Rene Chi"
 date: "2025-09-13"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +23,7 @@ Importing data while inspecting it
 data("early_january_weather")
 summary(early_january_weather)
 ```
-The `early_january_weather` dataset contains variables include `year`, `month`, `day`, `hour`, `origin` (Newark airport), `temp` (temperature in Fahrenheit), `dewp` (dew point), `humid` (relative humidity), `wind_dir`, `wind_speed`, `wind_gust`, `precip` (precipitation in inches), `pressure` (sea level pressure in millibars), `visib` (visibility in miles), and `time_hour` (yyyy/mm/dd/hr/min/second). 
+The `early_january_weather` dataset contains variables include `year`, `month`, `day`, `hour`, `origin` (Newark airport), `temp` (temperature in Fahrenheit), `dewp` (dew point), `humid` (relative humidity), `wind_dir` (wind direction), `wind_speed`, `wind_gust`, `precip` (precipitation in inches), `pressure` (sea level pressure in millibars), `visib` (visibility in miles), and `time_hour` (yyyy/mm/dd/hr/min/second). 
 
 This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns. The mean temperature during this period is `r mean(early_january_weather$temp, na.rm = TRUE)` degrees Fahrenheit.
 

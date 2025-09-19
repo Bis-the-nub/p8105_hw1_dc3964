@@ -2,10 +2,11 @@
 library(moderndive)
 library(ggplot2)
 library(tidyverse)
-data("early_january_weather")
+
 
 ##Problem 1
-summary(early_january_weather)
+data("early_january_weather")
+help("early_january_weather")
 
 #calculating dataset size
 nrow(early_january_weather)
